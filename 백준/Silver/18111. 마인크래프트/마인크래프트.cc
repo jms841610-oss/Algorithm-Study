@@ -1,3 +1,13 @@
+/*
+ * Problem: Baekjoon 18111 - 마인크래프트 (Silver 2)
+ * Time Complexity: O(H^2)
+ * H (Height) ranges from 0 to 256.
+ * Instead of iterating N*M matrix (500*500), used frequency array to reduce operations.
+ * Space Complexity: O(H)
+ * Only used a frequency array of size 257 to store block counts.
+ * Input matrix storage is not strictly necessary if processed on-the-fly.
+ * Key Logic: Brute Force with Optimization (Counting Sort concept)
+ */
 #include <iostream>
 #include <vector>
 
@@ -45,4 +55,5 @@ int main(){
     cout << min_time << " " << max_height << endl;
 
     return 0;
+
 }
