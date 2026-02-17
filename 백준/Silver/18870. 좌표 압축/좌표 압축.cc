@@ -1,3 +1,18 @@
+/**
+ * @file coordinate_compression.cpp
+ * @brief 좌표 압축 (Coordinate Compression) 구현
+ * @details
+ * - 원본 좌표의 값을 대소 관계를 유지한 채 0 ~ (distinct N - 1) 범위로 매핑하는 기법.
+ * - 값의 범위가 매우 크지만(e.g., -10^9 ~ 10^9), 개수(N)는 적을 때 유용함.
+ * * @algorithm
+ * 1. 입력받은 좌표를 복사하여 정렬한다 (O(N log N)).
+ * 2. 중복된 값을 제거한다 (unique & erase idiom) (O(N)).
+ * 3. 원본 좌표가 정렬된 배열에서 몇 번째 위치하는지 이분 탐색(lower_bound)으로 찾는다 (O(log N)).
+ * * @complexity
+ * - Time Complexity: O(N log N) (정렬 및 이분 탐색)
+ * - Space Complexity: O(N) (두 개의 벡터 저장)
+ */
+
 #include <iostream>
 #include <vector>
 #include <algorithm> // sort, unique, lower_bound
