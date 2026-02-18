@@ -68,16 +68,7 @@ void dividing(){
         }
         Q.push_back(cnt + '0');
     }
-    int len_Q = Q.size();
-    int cnt_Q = 0;
-
-    for(int i=0;i<len_Q;i++){
-        if(Q[i]!='0'){
-            cnt_Q = i;
-            break;
-        }
-    }
-    Q.erase(0,cnt_Q);
+    while((Q[0]=='0')&&(Q.size()>0)) Q.erase(0,1);
 
     if(Q.empty()) Q = "0";
     if(R.empty()) R = "0";
