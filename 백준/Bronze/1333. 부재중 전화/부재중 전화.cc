@@ -9,19 +9,18 @@ int main(){
     int N,L,D;
     cin >> N >> L >> D;
     
-    int start = L;
-    int end = L+5;
-    int n = 1;
+    int T = D;
+    int cycle = L+5;
 
-    for(int i=0;i<N-1;i++){
-        while((D*n) < start) n++;
-        if((start <= (D*n))&&((D*n) < end)) break;
-        start += (L+5);
-        end += (L+5);
+    while(true){
+        if(T >= (N*cycle -5)) break;
+
+        int time_in_cycle = T % cycle;
+
+        if(time_in_cycle < L) T += D;
+        else                  break;
     }
-    while((D*n) < start) n++;
-
-    cout << D*n << endl;
+    cout << T << endl;
 
     return 0;
 }
