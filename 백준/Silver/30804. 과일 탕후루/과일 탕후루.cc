@@ -3,14 +3,6 @@
 
 using namespace std;
 
-int get_type(const vector<int> &freq){
-    int num = 0;
-
-    for(int i=1;i<10;i++){
-        if(freq[i]>0) num++;
-    }
-    return num;
-}
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
@@ -20,7 +12,6 @@ int main(){
 
     vector<int> line(N);
     vector<int> freq(10,0);
-    vector<int> &ref_freq = freq;
 
     for(int i=0;i<N;i++){
         int type;
@@ -29,15 +20,16 @@ int main(){
     }
     int left = 0;
     int max_len = 0;
+    int num_type = 0;
 
     for(int right=0;right<N;right++){
+        if(freq[line[right]]==0) num_type++;
         freq[line[right]]++;
-        int num_type = get_type(ref_freq);
 
         while(num_type>2){
             freq[line[left]]--;
+            if(freq[line[left]]==0) num_type--;
             left++;
-            num_type = get_type(ref_freq);
         }
         max_len = max(max_len,right-left+1);
     }
