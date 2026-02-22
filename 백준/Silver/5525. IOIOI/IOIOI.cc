@@ -12,22 +12,24 @@ int main(){
     string line;
     cin >> line;
 
-    int len = 1 + (2 * N);
+    int idx = 0;
+    int num = 0;
     int cnt = 0;
-    string ans = "I";
 
-    for(int i=0;i<N;i++){
-        ans += "OI";
-    }
-    for(int front=0;front<=M-len;front++){
-        string current = "";
-        
-        for(int ele=front;ele<front+len;ele++){
-            current += line[ele];
+    while(idx+2<M){
+        if((line[idx]=='I')&&(line[idx+1]=='O')&&(line[idx+2]=='I')){
+            cnt++;
+            if(cnt==N){
+                cnt--;
+                num++;
+            }
+            idx += 2;
+        }else{
+            cnt = 0;
+            idx++;
         }
-        if(current==ans) cnt++;
     }
-    cout << cnt << "\n";
+    cout << num << "\n";
 
     return 0;
 }
