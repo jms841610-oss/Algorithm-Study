@@ -13,9 +13,9 @@ vector<int> house_num;
 int dy[] = {1,0,-1,0};
 int dx[] = {0,1,0,-1};
 
-void visiting(int row,int col,int* num){
+void visiting(int row,int col,int& num){
     is_visited[row][col] = true;
-    (*num)++;
+    num++;
 
     for(int i=0;i<4;i++){
         int next_y = row + dy[i];
@@ -34,7 +34,7 @@ void get_num(){
         for(int col=0;col<N;col++){
             if((is_house[row][col])&&(!is_visited[row][col])){
                 int num = 0;
-                visiting(row,col,&num);
+                visiting(row,col,num);
                 house_num.push_back(num);
             }
         }
