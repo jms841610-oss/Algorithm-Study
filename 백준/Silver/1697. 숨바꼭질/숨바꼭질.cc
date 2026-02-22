@@ -4,46 +4,68 @@
 
 using namespace std;
 
-vector<bool> is_visited(100001,false);
-vector<int> dis(100001,0);
-queue<int> q;
+// 시작점 N에서 목표점 K까지 도달하는 최단 시간을 구하는 BFS 함수
+int get_cnt(int N, int K) {
+    // 1. 상태 변수 지역화 (Local Variables)
+    // 함수 내부에서 선언하여 여러 테스트 케이스 실행 시에도 상태 오염(Side-effect) 방지
+    // 최대 위치 100,000까지 접근 가능하므로 배열 크기를 100,001로 할당
+    vector<bool> is_visited(100001, false); // 방문 여부 체크 (무한 루프 방지)
+    vector<int> dis(100001, 0);             // 시작점으로부터의 소요 시간(초) 기록
+    queue<int> q;                           // 탐색할 위치를 담는 큐
 
-int get_cnt(int N,int K){
+    // 2. 초기 상태 설정
     q.push(N);
     is_visited[N] = true;
     dis[N] = 0;
 
-    while(!q.empty()){
+    // 3. BFS (너비 우선 탐색) 시작
+    // 가중치가 1초로 동일한 그래프에서 최단 거리를 보장하는 알고리즘
+    while (!q.empty()) {
         int front = q.front();
         q.pop();
 
-        if(front==K) return dis[front];
+        // 🎯 목표 지점 도달 시 즉시 종료 (최단 시간 반환)
+        if (front == K) return dis[front];
 
-        if((front>0)&&(!is_visited[front-1])){
-            q.push(front-1);
-            is_visited[front-1] = true;
-            dis[front-1] = dis[front] + 1;
+        // 4. 다음 가능한 이동 경로 3가지 탐색 (분기)
+        // 공통 조건: 1) 맵의 범위를 벗어나지 않을 것, 2) 이전에 방문한 적이 없을 것
+
+        // [경우 1] 뒤로 걷기 (현재 위치 - 1)
+        if ((front > 0) && (!is_visited[front - 1])) {
+            q.push(front - 1);
+            is_visited[front - 1] = true;
+            dis[front - 1] = dis[front] + 1; // 1초 경과
         }
-        if((front<100000)&&(!is_visited[front+1])){
-            q.push(front+1);
-            is_visited[front+1] = true;
-            dis[front+1] = dis[front] + 1;
+        
+        // [경우 2] 앞으로 걷기 (현재 위치 + 1)
+        if ((front < 100000) && (!is_visited[front + 1])) {
+            q.push(front + 1);
+            is_visited[front + 1] = true;
+            dis[front + 1] = dis[front] + 1; // 1초 경과
         }
-        if((front<50001)&&(!is_visited[front*2])){
-            q.push(front*2);
-            is_visited[front*2] = true;
-            dis[front*2] = dis[front] + 1;
+        
+        // [경우 3] 순간이동 (현재 위치 * 2)
+        // front * 2 가 100,000을 초과하면 Out of Bounds 에러가 발생하므로 front < 50001 로 방어
+        if ((front < 50001) && (!is_visited[front * 2])) {
+            q.push(front * 2);
+            is_visited[front * 2] = true;
+            dis[front * 2] = dis[front] + 1; // 1초 경과
         }
     }
+    
+    // 정상적인 흐름에서는 도달하지 않으나, 컴파일러 경고 방지를 위한 기본 반환값
+    return -1;
 }
-int main(){
+
+int main() {
+    // 입출력 스트림 동기화 해제로 성능 최적화 (C++ 알고리즘 필수 테크닉)
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int N,K;
+    int N, K;
     cin >> N >> K;
 
-    int min_cnt = get_cnt(N,K);
+    int min_cnt = get_cnt(N, K);
 
     cout << min_cnt << "\n";
 
