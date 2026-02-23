@@ -1,0 +1,52 @@
+최소 신장 트리 - 크루스칼 알고리즘 (Kruskal's Algorithm)
+
+모든 정점을 연결하는 부분 그래프 중에서 간선의 가중치 합이 최소가 되는 트리(MST)를 구합니다. 
+
+유니온-파인드(Union-Find) 자료구조를 활용합니다.
+
+
+
+의사코드 (Pseudocode)
+
+Plaintextfunction Kruskal(Graph, V):
+    MST_cost = 0
+    edges_used = 0
+    sort(Graph.edges by weight in ascending order)
+    
+    for each 정점 v:
+        MakeSet(v) // 초기 부모 노드를 자기 자신으로 설정
+
+    for each edge (u, v, weight) in Graph.edges:
+        if Find(u) != Find(v): // 사이클이 발생하지 않는다면
+            Union(u, v)        // 두 트리를 병합
+            MST_cost += weight
+            edges_used += 1
+            
+        if edges_used == V - 1:
+            break
+            
+    return MST_cost
+
+복잡도:
+
+시간 복잡도: O(E * log E) 또는 O(E * log V)
+
+공간 복잡도: O(V + E)
+
+
+
+공학적 설명: 
+
+전체 알고리즘의 병목은 간선을 가중치 기준으로 정렬하는 데(O(E * log E)) 발생합니다. 
+
+간선이 매우 많은 조밀 그래프보다는 희소 그래프 환경에서 유리합니다. 
+
+Union-Find 연산은 경로 압축(Path Compression) 적용 시 거의 상수 시간 O(alpha(V))에 동작하므로 성능에 미치는 영향이 미미합니다.
+
+
+
+디버깅 체크포인트 (Edge Cases):
+
+그래프가 2개 이상의 컴포넌트로 완전히 단절되어 있어 트리를 완성할 수 없는 경우 (최종 선택 간선 수가 V-1개가 아님).
+
+가중치의 합(MST_cost)이 int 범위를 초과하여 long long 타입이 필요한 경우.
