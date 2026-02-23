@@ -1,0 +1,54 @@
+위상 정렬 (Topological Sorting)
+
+사이클이 없는 방향 그래프(DAG, Directed Acyclic Graph)에서 정점들의 선후 관계(순서)를 위배하지 않도록 나열하는 알고리즘입니다.
+
+
+
+의사코드 (Pseudocode)
+
+Plaintextfunction TopologicalSort(Graph, V):
+    in_degree[] = 각 정점의 진입 차수 계산
+    Q = 큐 생성
+    result = 빈 리스트
+    
+    // 진입 차수가 0인(선행 조건이 없는) 정점 삽입
+    for i from 1 to V:
+        if in_degree[i] == 0:
+            Q.push(i)
+            
+    while Q가 비어있지 않음:
+        u = Q.pop()
+        result.append(u)
+        
+        for each neighbor v of u:
+            in_degree[v] -= 1 // 간선 제거
+            if in_degree[v] == 0:
+                Q.push(v)
+                
+    if result.length != V:
+        return "사이클 발생! 위상 정렬 불가"
+    return result
+
+
+
+복잡도:
+
+시간 복잡도: O(V + E)
+
+공간 복잡도: O(V + E)
+
+
+
+공학적 설명: 
+
+각 정점과 간선을 정확히 한 번씩만 방문하므로 선형 시간에 동작하는 매우 효율적인 알고리즘입니다. 
+
+작업 스케줄링, 선수 과목 정렬 등 선행 제약 조건이 있는 시스템을 모델링할 때 최적의 솔루션입니다.
+
+
+
+디버깅 체크포인트 (Edge Cases):
+
+그래프 내에 사이클이 존재하여 위상 정렬이 불가능한 경우 (결과 배열에 담긴 노드의 수가 전체 노드 $V$보다 작음).
+
+진입 차수가 0인 정점이 여러 개일 때, 문제에서 요구하는 특정 정렬 기준(예: 노드 번호가 작은 것부터)이 있는지 파악해야 합니다 (이 경우 일반 큐 대신 우선순위 큐 사용).
