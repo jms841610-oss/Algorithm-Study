@@ -1,0 +1,65 @@
+투 포인터 / 슬라이딩 윈도우 (Two Pointers / Sliding Window)
+
+1차원 배열에서 두 개의 포인터 위치를 조작하거나, 일정한 크기의 윈도우를 밀고 나가면서 연속된 구간의 조건(합, 개수 등)을 만족하는 최적해를 찾는 기법입니다.
+
+
+
+의사코드 (Pseudocode)
+
+Plaintextfunction TwoPointers(array, target_sum):
+    left = 0, right = 0
+    current_sum = 0
+    count = 0
+    
+    while right < array.length:
+        current_sum += array[right]
+        
+        while current_sum >= target_sum and left <= right:
+            if current_sum == target_sum:
+                count += 1
+            current_sum -= array[left]
+            left += 1
+            
+        right += 1
+        
+    return count
+
+
+
+복잡도:
+
+시간 복잡도: O(N)
+
+공간 복잡도: O(1) (상수 개의 포인터 변수만 사용)
+
+
+
+공학적 설명: 
+
+이중 for문으로 모든 부분 배열을 탐색하면$O(N^2)이 소요되지만, 
+
+두 포인터 left와 right가 배열을 각자 최대 한 번씩만 스캔하도록 강제하여 $O(N)$으로 최적화합니다. 
+
+포인터 변수 몇 개만 추가로 유지하므로 공간 복잡도가 $O(1)$이며, 
+
+캐시 지역성(Cache Locality)이 뛰어나 실제 실행 속도가 매우 빠릅니다.
+
+
+
+디버깅 체크포인트 (Edge Cases):
+
+음수 데이터의 존재: 
+
+   배열에 음수가 섞여 있다면 right가 증가할 때 합이 항상 커진다는 단조성(Monotonicity)이 깨지므로 일반적인 투 포인터가 작동하지 않습니다. 
+
+   (이 경우 누적합 + 해시맵 등 다른 접근 필요)
+
+포인터 이동 순서 역전: 
+
+   left 포인터가 right 포인터를 앞지르는(left > right) 상황에 대한 예외 처리가 없으면 인덱스 에러나 논리적 오류가 발생합니다.
+
+마지막 구간 누락: 
+
+   while 루프 종료 후, 아직 평가되지 않은 마지막 구간(예: right가 끝에 도달했으나 아직 조건을 검사해야 하는 경우)이 
+
+   버려지지 않도록 루프 밖에서 후처리가 필요한지 점검해야 합니다.
