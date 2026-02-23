@@ -1,0 +1,43 @@
+다익스트라 알고리즘 (Dijkstra's Algorithm)
+
+음의 가중치가 없는 그래프에서 단일 출발점으로부터 다른 모든 노드까지의 최단 경로를 구하는 알고리즘입니다.
+
+의사코드 (Pseudocode)
+
+function Dijkstra(Graph, source):
+    dist[] = 무한대(INF)로 초기화
+    dist[source] = 0
+    PQ = 우선순위 큐 생성 (비용이 작은 순)
+    PQ.push((0, source))
+
+    while PQ가 비어있지 않음:
+        (current_dist, u) = PQ.pop()
+
+        // 이미 처리된 낡은 정보라면 무시
+        if current_dist > dist[u]: continue
+
+        for each neighbor v of u:
+            new_dist = current_dist + weight(u, v)
+            if new_dist < dist[v]:
+                dist[v] = new_dist
+                PQ.push((new_dist, v))
+                
+    return dist
+
+복잡도 및 공학적 설명시간 복잡도: $O(E*log V)
+
+공간 복잡도: $O(V + E) (그래프 인접 리스트 및 우선순위 큐 메모리)
+
+공학적 설명: 
+
+우선순위 큐(Min-Heap)를 사용함으로써 매번 최솟값을 찾는 $O(V)$의 탐색 시간을 $O(\log V)$로 단축시킵니다. 
+
+정점($V$)과 간선($E$)이 10만 개 이상인 희소 그래프(Sparse Graph) 조건에서도 1초 이내에 매우 효율적으로 동작합니다.
+
+디버깅 체크포인트 (Edge Cases):
+
+출발점과 도착점이 단절되어 있는 경우 무한대(INF) 값이 그대로 유지되는지 확인해야 합니다.
+
+INF 값을 너무 작게 설정하면 갱신 오류가 생길 수 있습니다 (예: 10억 이상의 매우 큰 값 필요).
+
+양방향 간선인지 단방향 간선인지 문제 조건을 엄격히 확인해야 합니다.
