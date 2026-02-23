@@ -4,6 +4,8 @@
 
 주로 C++을 사용하여 문제를 해결하며, 논리적인 사고 과정과 효율적인 코드 작성을 지향합니다.
 
+
+
 디렉토리 구조
 
 현재 저장소는 다음과 같은 구조로 운영되고 있습니다.
@@ -13,6 +15,8 @@
 백준/           Baekjoon Online Judge 문제 풀이 코드
 
 README.md       저장소 소개 및 학습 현황
+
+
 
 문제 풀이 원칙
 
@@ -24,10 +28,17 @@ README.md       저장소 소개 및 학습 현황
    
 3.단계별 접근:
    1단계: 핵심 알고리즘 힌트 도출
+   
    2단계: 의사코드(Pseudocode) 작성
+   
    3단계: 기존 코드의 오류 분석 및 디버깅
 
+
+
 Tech Stack
+
 Language: C++
+
 Environment: Windows / Visual Studio Code 
+
 Judge: Baekjoon
