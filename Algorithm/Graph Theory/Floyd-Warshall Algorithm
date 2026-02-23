@@ -4,7 +4,9 @@
 
 
 
-의사코드 (Pseudocode)Plaintextfunction FloydWarshall(Graph, V):
+의사코드 (Pseudocode)
+
+Plaintextfunction FloydWarshall(Graph, V):
     dist[][] = 인접 행렬로 초기화 (자기 자신은 0, 연결 안 된 곳은 INF)
 
     // k: 거쳐가는 노드, i: 출발 노드, j: 도착 노드
