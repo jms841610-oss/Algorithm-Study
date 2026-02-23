@@ -1,0 +1,45 @@
+플로이드-워셜 알고리즘 (Floyd-Warshall Algorithm)
+
+모든 정점에서 모든 정점으로의 최단 경로를 한 번에 구하는 알고리즘입니다.
+
+
+
+의사코드 (Pseudocode)Plaintextfunction FloydWarshall(Graph, V):
+    dist[][] = 인접 행렬로 초기화 (자기 자신은 0, 연결 안 된 곳은 INF)
+
+    // k: 거쳐가는 노드, i: 출발 노드, j: 도착 노드
+    for k from 1 to V:
+        for i from 1 to V:
+            for j from 1 to V:
+                if dist[i][k] + dist[k][j] < dist[i][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+                    
+    return dist
+
+
+
+복잡도:
+
+시간 복잡도: O(V^3)
+
+공간 복잡도: O(V^2) (2차원 인접 행렬 메모리)
+
+
+
+공학적 설명: 
+
+3중 루프를 사용하므로 구현이 매우 직관적이지만 
+
+V가 조금만 커져도 연산량이 폭발적으로 증가합니다. 
+
+통상적으로 V <= 500 의 조밀 그래프(Dense Graph) 환경에서만 채택할 수 있습니다. 
+
+상수가 매우 작기 때문에 V가 작다면 다익스트라를 V번 돌리는 것보다 캐시 히트율이 높아 더 빠를 수 있습니다.
+
+
+
+디버깅 체크포인트 (Edge Cases):
+
+반복문의 순서가 반드시 k(거쳐가는 노드) -> i(출발) -> j(도착) 순서여야만 논리적 오류가 발생하지 않습니다.
+
+i에서 j로 가는 경로가 없는 노드끼리 더하다가 오버플로우가 발생할 수 있습니다. (INF + INF > Integer.MAX_VALUE)
