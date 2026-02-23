@@ -27,6 +27,8 @@ Plaintextfunction Kruskal(Graph, V):
             
     return MST_cost
 
+
+
 복잡도:
 
 시간 복잡도: O(E * log E) 또는 O(E * log V)
