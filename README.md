@@ -32,6 +32,6 @@ Tech Stack
 
 Language: C++
 
-Environment: Windows / Visual Studio Code 
+Environment: Visual Studio Code 
 
 Judge: Baekjoon
