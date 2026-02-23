@@ -12,9 +12,11 @@
 
 디렉토리/파일   설명
 
-백준/           Baekjoon Online Judge 문제 풀이 코드
+백준            Baekjoon Online Judge 문제 풀이 코드
 
-README.md       저장소 소개 및 학습 현황
+Algorithm       핵심 알고리즘 및 자료구조 설명
+
+README.md       저장소 소개 
 
 
 
