@@ -1,0 +1,63 @@
+유니온-파인드 (Union-Find / Disjoint Set)
+
+여러 노드가 서로 같은 그래프(집합)에 속해 있는지 판별하고, 두 집합을 빠르게 병합하는 자료구조입니다.
+
+
+
+
+의사코드 (Pseudocode)
+
+parent[] = 각 노드의 부모를 자기 자신으로 초기화 (1 to N)
+
+function Find(x):
+    if parent[x] == x:
+        return x
+    // 경로 압축(Path Compression): 찾음과 동시에 트리를 평평하게 만듦
+    parent[x] = Find(parent[x])
+    return parent[x]
+
+function Union(x, y):
+    rootX = Find(x)
+    rootY = Find(y)
+    
+    if rootX != rootY:
+        // 한 쪽 루트를 다른 쪽 루트의 자식으로 연결 (Rank 최적화 생략 시)
+        parent[rootY] = rootX
+
+
+
+복잡도:
+
+시간 복잡도: O(alpha(N)) (거의 O(1) 상수에 수렴)
+
+공간 복잡도: O(N) (parent 1차원 배열)
+
+
+
+공학적 설명: 
+
+크기가 N=10^6 인 집합에서 합집합 연산과 소속 판별을 반복할 때, 
+
+경로 압축(Path Compression)을 적용하면 트리의 깊이가 얕게 유지되어 아커만 함수 역함수 alpha(N)의 시간 복잡도를 가집니다. 
+
+이는 우주에 있는 원자 수만큼의 N이 주어져도 5 이하의 상수로 처리됨을 의미하며, 
+
+추가 메모리도 1차원 배열 하나면 충분하여 O(N) 공간만 차지하는 매우 공학적으로 훌륭한 자료구조입니다.
+
+
+
+디버깅 체크포인트 (Edge Cases):
+
+경로 압축 누락: 
+
+   Find 함수에서 return Find(parent[x])만 하고 parent[x] = 로 갱신하지 않으면, 트리가 한쪽으로 치우쳐(Skewed) 시간 복잡도가 $O(N)$으로 악화됩니다.
+
+루트 노드 미병합: 
+
+   Union 함수에서 parent[y] = x처럼 자식 노드를 직접 연결하면 트리의 일관성이 깨집니다. 
+
+   반드시 rootX와 rootY를 구해 병합해야 합니다.
+
+0-based vs 1-based 인덱스: 
+
+   문제에서 주어지는 노드 번호가 0부터 시작하는지 1부터 시작하는지 혼동하여 배열 초기화를 잘못하면 IndexOutOfBounds가 발생합니다.
