@@ -1,0 +1,52 @@
+벨만-포드 알고리즘 (Bellman-Ford Algorithm)
+
+음의 가중치가 포함된 그래프에서 최단 경로를 구하거나, 음의 사이클(Negative Cycle) 존재 여부를 판별할 때 사용합니다.
+
+
+
+의사코드 (Pseudocode)
+
+Plaintextfunction BellmanFord(Graph, source, V, E):
+    dist[] = 무한대(INF)로 초기화
+    dist[source] = 0
+
+    // V-1번 모든 간선에 대해 Relaxation(완화) 수행
+    for i from 1 to V-1:
+        for each edge (u, v, weight) in Graph:
+            if dist[u] != INF and dist[u] + weight < dist[v]:
+                dist[v] = dist[u] + weight
+
+    // 음의 사이클 검증
+    for each edge (u, v, weight) in Graph:
+        if dist[u] != INF and dist[u] + weight < dist[v]:
+            return "음의 사이클 존재!"
+            
+    return dist
+
+
+
+복잡도:
+
+시간 복잡도: $O(V * E)
+
+공간 복잡도: $O(V + E)
+
+
+
+공학적 설명: 
+
+모든 간선을 V-1번 순회해야 하므로 다익스트라에 비해 비효율적입니다. 
+
+따라서 제한 시간이 1초일 때 V *E 연산 횟수가 약 10^8을 넘지 않는지 반드시 확인해야 합니다. 
+
+일반적인 최단 경로 문제에서는 다익스트라를 우선 고려하되, 
+
+'음수 간선'이 존재할 때만 방어적으로 채택해야 하는 알고리즘입니다.
+
+
+
+디버깅 체크포인트 (Edge Cases):
+
+출발점에서 도달할 수 없는 컴포넌트에 음의 사이클이 있는 경우를 주의해야 합니다. 
+
+(도달 불가능한 정점은 dist[u] != INF 조건으로 필터링 필요)
