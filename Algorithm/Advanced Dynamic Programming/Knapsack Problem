@@ -23,7 +23,7 @@ function Knapsack(W_max, weights[], values[], N):
 
 복잡도:
 
-시간 복잡도: O(N \times W) (N: 물건의 수, W: 배낭의 최대 무게)
+시간 복잡도: O(N * W) (N: 물건의 수, W: 배낭의 최대 무게)
 
 공간 복잡도: O(W) (1차원 배열 최적화 시)
 
