@@ -51,4 +51,45 @@ void BFS(vector<vector<int>> &tomato_status, int length, int width) {
                 if (tomato_status[next_row][next_col] == 0) {
                     unriped_tomato--;
                     
-                    // 💡 최
+                    // 💡 최적화 핵심 3: 원본 맵에 '현재 시간 + 1'을 직접 덮어씌움 (거리 갱신 + 방문 처리 동시 해결)
+                    tomato_status[next_row][next_col] = tomato_status[current.y][current.x] + 1;
+                    
+                    // 갱신된 시간 중 가장 큰 값을 계속 추적
+                    max_cost = max(max_cost, tomato_status[next_row][next_col]);
+                    
+                    q.push({next_row, next_col});
+                }
+            }
+        }
+    }
+    
+    // 3. 결과 출력
+    if (unriped_tomato > 0) cout << "-1\n"; // 다 익히지 못한 경우
+    else                    cout << max_cost - 1 << "\n"; // 시작을 1로 했으므로, 실제 일수는 1을 빼야 함
+
+    return;
+}
+
+int main() {
+    // C++ 입출력 속도 향상을 위한 최적화
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int width, length;
+    cin >> width >> length;
+
+    // 입력 상태를 저장하는 단일 2차원 배열 (최적화로 인해 이 배열 하나만 사용됨)
+    vector<vector<int>> tomato_status(length, vector<int>(width));
+
+    for (int row = 0; row < length; row++) {
+        for (int col = 0; col < width; col++) {
+            int status;
+            cin >> status;
+            tomato_status[row][col] = status;
+        }
+    }
+    
+    BFS(tomato_status, length, width);
+
+    return 0;
+}
