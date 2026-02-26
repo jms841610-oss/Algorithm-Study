@@ -1,5 +1,5 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <string>
 
 using namespace std;
@@ -8,7 +8,7 @@ int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
-    map<string,int> votes;
+    unordered_map<string,int> votes;
 
     int max_votes = 0;
 
