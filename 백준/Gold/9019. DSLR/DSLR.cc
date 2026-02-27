@@ -13,31 +13,11 @@ int S(int n){
 }
 int L(int n){
     if(n==0) return 0;
-
-    int digit[4];
-    int Q = 1000;
-
-    for(int i=0;i<4;i++){
-        int d = n / Q;
-        digit[i] = d;
-        n %= Q;
-        Q /= 10;
-    }
-    return ((digit[1] * 10 + digit[2]) * 10 + digit[3]) * 10 + digit[0];
+    else     return (n%1000)*10 + (n/1000);
 }
 int R(int n){
     if(n==0) return 0;
-
-    int digit[4];
-    int Q = 1000;
-
-    for(int i=0;i<4;i++){
-        int d = n / Q;
-        digit[i] = d;
-        n %= Q;
-        Q /= 10;
-    }
-    return ((digit[3] * 10 + digit[0]) * 10 + digit[1]) * 10 + digit[2];
+    else     return (n/10) + (n%10)*1000;
 }
 string BFS(int A,int B){
     vector<int> parent(10000);
