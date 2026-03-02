@@ -21,13 +21,12 @@ int main(){
         if((is_ten)&&(line[i]=='1')){
             total += 10;
             cnt++;
-        }else if(line[i]!='0'){
-            total += line[i] - '0';
-            cnt++;
-        }
-        if(line[i]=='0'){
+            is_ten = false;
+        }else if(line[i]=='0'){
             is_ten = true;
         }else{
+            total += line[i] - '0';
+            cnt++;
             is_ten = false;
         }
     }
