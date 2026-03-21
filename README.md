@@ -4,9 +4,9 @@
 
 효율적인 코드 작성과 논리적인 문제 해결 능력을 기르는 것을 목표로 합니다.
 
-/
-/
-/
+\
+\
+\
 
 Tech Stack
 
@@ -16,19 +16,19 @@ IDE: Visual Studio Code
 
 Judge: Baekjoon Online Judge
 
-/
-/
-/
+\
+\
+\
 
 Repository Structure
 
-├── Problems/           # 문제 풀이 코드 (문제 번호_문제명.cpp)
-├── Theories/           # 알고리즘 핵심 이론 정리 (Markdown)
-└── README.md           # 저장소 소개
+Algorithm    알고리즘 핵심 이론 정리 (Markdown)
+Baekjoon     문제 풀이 코드 (문제 번호_문제명.cpp)
+README.md    저장소 소개
 
-/
-/
-/
+\
+\
+\
 
 Algorithm Theories
 
@@ -42,9 +42,9 @@ Algorithm Theories
 
 기타: Greedy, Divide and Conquer, Two Pointers, Binary Search
 
-/
-/
-/
+\
+\
+\
 
 Rules & Conventions
 
