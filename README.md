@@ -30,9 +30,9 @@ Repository Structure
 
 Algorithm|-----------|알고리즘 핵심 이론 정리 (Markdown)
 
-Baekjoon|------------|문제 풀이 코드 (문제 번호_문제명.cpp)
+Baekjoon|-----------|문제 풀이 코드 (문제 번호_문제명.cpp)
 
-README.md|-----------|저장소 소개
+README.md|--------|저장소 소개
 
 \
 \
