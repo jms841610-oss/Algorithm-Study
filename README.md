@@ -1,35 +1,57 @@
 # Algorithm-Study
 
-\
+백준 온라인 저지(BOJ)를 통해 해결한 문제들과 학습한 핵심 알고리즘 이론을 기록하는 저장소입니다.
 
-개요
+효율적인 코드 작성과 논리적인 문제 해결 능력을 기르는 것을 목표로 합니다.
 
-개인적인 알고리즘 문제 풀이 실력 향상을 위해 학습 내용을 기록하고 관리하는 저장소입니다.
-
-\
-\
-\
-
-디렉토리 구조
-
-현재 저장소는 다음과 같은 구조로 운영되고 있습니다.
-
-디렉토리--------설명
-
-Algorithm-------핵심 알고리즘 및 자료구조 설명
-
-백준-------------문제 풀이 코드
-
-README.md----저장소 소개 
-
-\
-\
-\
+/
+/
+/
 
 Tech Stack
 
-Language: C/C++
+Language: C++
 
-Environment: Visual Studio Code 
+IDE: Visual Studio Code 
 
-Judge: Baekjoon
+Judge: Baekjoon Online Judge
+
+/
+/
+/
+
+Repository Structure
+
+├── Problems/           # 문제 풀이 코드 (문제 번호_문제명.cpp)
+├── Theories/           # 알고리즘 핵심 이론 정리 (Markdown)
+└── README.md           # 저장소 소개
+
+/
+/
+/
+
+Algorithm Theories
+
+학습한 알고리즘의 핵심 원리와 구현 방법을 정리했습니다.
+
+자료구조: Stack, Queue, Hash Table, Heap, Segment Tree
+
+그래프 탐색: DFS, BFS, Dijkstra, Floyd-Warshall
+
+동적 계획법 (DP): Knapsack, LIS, LCS
+
+기타: Greedy, Divide and Conquer, Two Pointers, Binary Search
+
+/
+/
+/
+
+Rules & Conventions
+
+코드 작성: 가독성을 위해 변수명은 의미 있게 설정하며, 필요 시 주석을 활용합니다.
+
+이론 정리: 단순히 코드를 복사하는 것이 아니라, 
+
+왜 해당 알고리즘을 사용했는지 **'복잡도'**와 **'설계 이유'**를 포함합니다.
+
+업데이트: 매일 최소 1문제 이상 풀이 및 정리를 지향합니다.
