@@ -9,7 +9,7 @@ int main() {
     cin.tie(NULL);
 
     int N;
-    if (!(cin >> N)) return 0;
+    cin >> N;
 
     // x좌표와 y좌표를 따로 저장하거나, 기울기만 따로 저장하여 탐색 효율을 높입니다.
     vector<long long> x_coords(N);
