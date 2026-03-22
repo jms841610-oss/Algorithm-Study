@@ -1,7 +1,6 @@
 #include <iostream>
 #include <map>
 #include <vector>
-#include <set>
 #include <algorithm>
 
 using namespace std;
@@ -13,37 +12,19 @@ int main(){
     int N;
     cin >> N;
 
-    multimap<string,string> m;
-    set<string> key;
-    vector<vector<string>> val(N);
-
+    map<string,vector<string>> m;
+    
     for(int i=0;i<N;i++){
         string mento,menti;
         cin >> mento >> menti;
-
-        m.insert({mento,menti});
-        key.insert(mento);
+        m[mento].push_back(menti);
     }
-    int idx = 0;
+    for(auto& pair : m){
+        sort(pair.second.begin(),pair.second.end(),greater<string>());
 
-    for(const string ele : key){
-        auto range = m.equal_range(ele);
-
-        for(auto it=range.first;it!=range.second;++it){
-            val[idx].push_back(it->second);
+        for(const string& menti : pair.second){
+            cout << pair.first << " " << menti << "\n";
         }
-        sort(val[idx].begin(),val[idx].end(),greater<string>());
-        idx++;
-    }
-    idx = 0;
-
-    for(const string ele : key){
-        auto range = key.equal_range(ele);
-
-        for(int i=0;i<val[idx].size();i++){
-            cout << ele << " " << val[idx][i] << "\n";
-        }
-        idx++;
     }
     return 0;
 }
