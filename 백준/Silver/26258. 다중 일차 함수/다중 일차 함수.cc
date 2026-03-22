@@ -1,54 +1,50 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <algorithm> // upper_bound를 사용하기 위해 추가
 
 using namespace std;
 
-int main(){
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
     int N;
     if (!(cin >> N)) return 0;
 
-    vector<long long> x(N);
-    vector<long long> y(N);
+    // x좌표와 y좌표를 따로 저장하거나, 기울기만 따로 저장하여 탐색 효율을 높입니다.
+    vector<long long> x_coords(N);
+    vector<long long> y_coords(N);
 
-    for(int i=0;i<N;i++){
-        cin >> x[i] >> y[i];
+    for (int i = 0; i < N; i++) {
+        cin >> x_coords[i] >> y_coords[i];
     }
-    
-    // slope 배열의 크기는 N-1 입니다.
-    vector<int> slope(N-1);
 
-    for(int i=0;i<N-1;i++){
-        if(y[i] < y[i+1]){
-            slope[i] = 1;
-        }else if(y[i] > y[i+1]){
-            slope[i] = -1;
-        }else{
-            slope[i] = 0;
+    // 각 구간의 기울기(증가 1, 감소 -1, 평행 0)를 저장할 벡터
+    vector<int> slopes(N - 1);
+    for (int i = 0; i < N - 1; i++) {
+        if (y_coords[i + 1] > y_coords[i]) {
+            slopes[i] = 1;
+        } else if (y_coords[i + 1] < y_coords[i]) {
+            slopes[i] = -1;
+        } else {
+            slopes[i] = 0;
         }
     }
-    
+
     int Q;
     cin >> Q;
 
-    for(int i=0;i<Q;i++){
+    for (int i = 0; i < Q; i++) {
         double query;
         cin >> query;
 
-        // query보다 엄격하게 큰 첫 번째 원소의 반복자를 찾습니다.
-        auto it = upper_bound(x.begin(), x.end(), query);
+        // upper_bound: query보다 '초과'하는 첫 번째 원소의 위치(반복자)를 찾습니다.
+        auto it = upper_bound(x_coords.begin(), x_coords.end(), query);
+ 
+        // 해당 x좌표의 인덱스를 구한 뒤 1을 빼주면, query가 속한 구간의 인덱스가 됩니다.
+        int index = distance(x_coords.begin(), it) - 1;
+        cout << slopes[index] << "\n";
         
-        // it가 x.begin()이거나 x.end()이면 유효한 구간을 벗어난 것입니다.
-        if(it != x.begin() && it != x.end()){
-            // 올바른 구간의 인덱스를 얻기 위해 1을 빼줍니다.
-            int idx = (it - x.begin()) - 1; 
-            
-            // 이제 안전하게 slope 배열에 접근할 수 있습니다.
-            cout << slope[idx] << "\n";
-        }
     }
     return 0;
 }
