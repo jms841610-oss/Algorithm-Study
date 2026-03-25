@@ -26,11 +26,11 @@ Standard Template Library : STL의 내부 동작 메커니즘을 이해하기 �
 
 Directory Structure
 
-├── Standard Template Library (Vector, Stack, Queue...)
+├── Standard Template Library (find, map, deque...)
 
-├── 백준 (Gold, Silver, Bronze...)
+├── 백준 (Bronze, Gold, Silver...)
 
-└── 알고리즘 (Dijkstra, Dynamic Programming, Sorting...)
+└── 알고리즘 (Greedy, BFS, Dijkstra...)
 
 \
 \
