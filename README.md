@@ -28,7 +28,7 @@ Directory Structure
 
 ├── Standard Template Library (Vector, Stack, Queue...)
 
-├── 백준 (문제 풀이)
+├── 백준 (Gold, Silver, Bronze...)
 
 └── 알고리즘 (Dijkstra, Dynamic Programming, Sorting...)
 
