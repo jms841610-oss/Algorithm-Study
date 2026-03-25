@@ -14,7 +14,7 @@ Header
 
 Core Contents
 
-Standard Template Library : STL의 내부 동작 메커니즘을 이해하기 위해 저수준(C언어)에서 재구현한 라이브러리 모음입니다.
+Standard Template Library : STL의 내부 동작 원리를 이해하기 위해 C언어로 재구현한 라이브러리 모음입니다.
 
 백준 : 해결한 문제들의 풀이 저장소로 문제 난이도 별로 저장되어 있습니다.
 
