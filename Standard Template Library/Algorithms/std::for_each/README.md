@@ -6,7 +6,7 @@ std::for_each
 
 std::for_each의 핵심 동작 원리 개요
 
-std::for_each는 특정 범위([first, last)) 안에 있는 모든 요소를 하나씩 순회하면서, 
+std::for_each는 특정 범위(first, last) 안에 있는 모든 요소를 하나씩 순회하면서, 
 
 사용자가 지정한 함수나 동작(Action)을 빠짐없이 실행해 주는 알고리즘입니다.
 
