@@ -23,6 +23,8 @@ void dijkstra(int depart, int arrive){
         int current_node = pq.top().second;
         pq.pop();
 
+        if(current_node == arrive) break;
+
         if(min_cost[current_node] < total_cost) continue;
 
         for(const auto& next : graph[current_node]){
