@@ -3,97 +3,97 @@
 
 using namespace std;
 
-// 💡 진실을 아는 사람과 연결된 모든 사람을 찾는 DFS (깊이 우선 탐색) 함수
-void DFS(int current, vector<vector<int>> &graph, vector<bool> &is_visited){
-    // 1. 현재 노드(사람)를 방문 처리 (진실을 아는 사람으로 표시)
-    is_visited[current] = true;
+// 각 노드의 부모(대표) 노드를 저장할 배열
+vector<int> parent_node;
 
-    // 2. 현재 사람과 연결된(같은 파티에 참석한 적 있는) 다른 사람들을 확인
-    for(int i=0; i<graph[current].size(); i++){
-        // 3. 연결된 사람 중 아직 방문하지 않은 사람(진실을 모르는 사람)이 있다면
-        if(!is_visited[graph[current][i]]){
-            // 재귀적으로 DFS를 호출하여 그 사람도 진실을 알게 됨을 표시
-            DFS(graph[current][i], graph, is_visited);
-        }
-    }
-    return;
+// 💡 Find 연산: 특정 노드가 속한 그룹의 '루트(대표) 노드'를 찾는 함수
+int find(int x) {
+    // 자기 자신이 부모라면(즉, 자신이 루트 노드라면) 그대로 반환
+    if (parent_node[x] == x) return x;
+    
+    // 경로 압축(Path Compression) 최적화: 
+    // 루트 노드를 찾으면서 거쳐가는 모든 노드의 부모를 바로 루트로 갱신하여 탐색 속도를 높임
+    return parent_node[x] = find(parent_node[x]);
 }
 
-int main(){
-    // 입출력 속도 향상을 위한 설정 (C++ 알고리즘 풀이 필수 세팅)
+// 💡 Union 연산: 두 노드가 속한 그룹을 하나로 합치는 함수
+void union_nodes(int a, int b) {
+    int rootA = find(a);
+    int rootB = find(b);
+    
+    // 두 노드의 루트가 다르다면(다른 그룹이라면) 하나로 합쳐줌
+    if (rootA != rootB) {
+        parent_node[rootB] = rootA; // B의 루트를 A의 루트 밑으로 연결
+    }
+}
+
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
 
     int N, M;
     cin >> N >> M; // N: 사람의 수, M: 파티의 수
 
-    // 그래프 생성 (사람 번호가 1번부터 시작하므로 크기를 N+1로 설정)
-    vector<vector<int>> graph(N+1);
-    // 각 파티에 참석하는 사람들의 목록을 저장하는 배열
-    vector<vector<int>> party(M);
-    // 해당 사람이 진실을 아는지 여부를 저장하는 배열 (true면 아는 사람)
-    vector<bool> is_visited(N+1, false);
-
-    int n;
-    cin >> n; // 최초로 이야기의 진실을 아는 사람의 수
-
-    vector<int> start(n);
-
-    // 최초로 진실을 아는 사람들의 번호를 배열에 저장
-    for(int i=0; i<n; i++){
-        cin >> start[i];
+    // 1. 초기화: 처음에는 모든 사람(노드)이 자기 자신을 루트로 갖는 독립적인 그룹
+    parent_node.resize(N + 1);
+    for (int i = 1; i <= N; i++) {
+        parent_node[i] = i;
     }
 
-    // [입력 파트] 각 파티별 참석자 정보 입력받기
-    for(int i=0; i<M; i++){
-        int m;
-        cin >> m; // 해당 파티에 오는 사람의 수
-
-        for(int j=0; j<m; j++){
-            int node;
-            cin >> node;
-            party[i].push_back(node); // 파티 배열에 참석자 번호 추가
-        }
+    // 2. 진실을 아는 사람들 입력
+    int truth_count;
+    cin >> truth_count;
+    
+    vector<int> truth(truth_count);
+    for (int i = 0; i < truth_count; i++) {
+        cin >> truth[i];
     }
 
-    // 💡 핵심 로직 1: 같은 파티에 참석한 사람들을 그래프로 모두 연결
-    for(int i=0; i<M; i++){
-        for(int j=0; j<party[i].size(); j++){
-            for(int k=0; k<party[i].size(); k++){
-                // 파티 참석자들끼리 서로 양방향 간선을 만들어 줌
-                // (자기 자신과는 연결할 필요가 없으므로 j != k 일 때만 추가)
-                if(j != k) graph[party[i][j]].push_back(party[i][k]);
+    // 각 파티의 정보를 저장할 배열
+    vector<vector<int>> parties(M);
+
+    // 3. 파티 정보 입력 및 Union 수행
+    for (int i = 0; i < M; i++) {
+        int p_count;
+        cin >> p_count;
+        
+        parties[i].resize(p_count);
+        for (int j = 0; j < p_count; j++) {
+            cin >> parties[i][j];
+            
+            // 파티에 2명 이상 있다면, 첫 번째 사람과 나머지 사람들을 모두 같은 그룹으로 묶음(Union)
+            if (j > 0) {
+                union_nodes(parties[i][j - 1], parties[i][j]);
             }
         }
     }
 
-    // 💡 핵심 로직 2: 최초로 진실을 아는 사람들을 시작점으로 DFS 탐색
-    // 이 탐색을 마치면, 진실을 건너건너 전해 듣게 될 모든 사람이 is_visited에 true로 체크됨
-    for(int i=0; i<n; i++){
-        DFS(start[i], graph, is_visited);
-    }
-
-    int ans = 0; // 거짓말(과장된 이야기)을 할 수 있는 파티의 수
-
-    // 💡 핵심 로직 3: 각 파티를 확인하며 거짓말 가능 여부 판별
-    for(int i=0; i<M; i++){
-        bool possible = true; // 우선 거짓말이 가능하다고 가정
+    // 4. 거짓말 가능 여부 판별
+    int ans = 0;
+    
+    for (int i = 0; i < M; i++) {
+        bool can_lie = true;
         
-        for(int j=0; j<party[i].size(); j++){
-            // 파티 참석자 중 단 한 명이라도 진실을 아는 사람이 있다면 (is_visited == true)
-            if(is_visited[party[i][j]]){
-                possible = false; // 거짓말을 할 수 없음
-                break;            // 더 이상 확인할 필요 없이 해당 파티 탐색 중단
+        // 해당 파티에 참석한 사람 중 단 한 명이라도
+        for (int j = 0; j < parties[i].size(); j++) {
+            int person = parties[i][j];
+            
+            // 진실을 아는 사람들과 같은 그룹에 속해 있는지(루트가 같은지) 확인
+            for (int k = 0; k < truth_count; k++) {
+                if (find(person) == find(truth[k])) {
+                    can_lie = false; // 같은 그룹이면 거짓말 불가
+                    break;
+                }
             }
+            if (!can_lie) break; // 이미 거짓말을 못 한다면 다음 사람을 확인할 필요 없음
         }
         
-        // 참석자 전원이 진실을 모를 경우에만 정답 카운트 증가
-        if(possible){
+        // 파티 참석자 모두가 진실을 아는 사람과 연결되어 있지 않을 때만 카운트
+        if (can_lie) {
             ans++;
         }
     }
 
-    // 최종적으로 거짓말을 할 수 있는 파티의 최대 개수 출력
     cout << ans << "\n";
     return 0;
 }
