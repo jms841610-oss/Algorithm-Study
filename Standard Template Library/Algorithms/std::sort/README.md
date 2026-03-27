@@ -1,6 +1,6 @@
 std::sort의 동작 원리 (IntroSort)
 
-C++ 표준 라이브러리의 std::sort는 주로 **인트로 정렬(Introsort, Introspective Sort)**이라는 알고리즘을 사용합니다. 
+C++ 표준 라이브러리의 std::sort는 주로 인트로 정렬(Introsort, Introspective Sort)이라는 알고리즘을 사용합니다. 
 
 이는 세 가지 정렬 알고리즘이 팀을 이뤄 각자의 약점을 보완하는 환상적인 구조입니다.
 
@@ -14,7 +14,7 @@ C++ 표준 라이브러리의 std::sort는 주로 **인트로 정렬(Introsort, 
 
 그래서 분할이 너무 깊어지면(재귀 호출이 한계치에 다다르면) 퀵 정렬을 멈추고, 
 
-최악의 경우에도 무조건 $O(N log N)$의 속도를 보장하는 힙 정렬로 스위칭합니다.
+최악의 경우에도 무조건 O(N log N)의 속도를 보장하는 힙 정렬로 스위칭합니다.
 
 삽입 정렬 (Insertion Sort): 
 
