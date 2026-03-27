@@ -1,20 +1,10 @@
-std::multimap
-
-\
-\
-\
-
-std::multimap의 핵심 동작 원리 개요
+std::multimap의 동작 원리 
 
 std::map에서는 하나의 키(Key)에 하나의 값(Value)만 가질 수 있었고, 같은 키가 들어오면 값을 덮어썼습니다. 
 
 하지만 std::multimap은 하나의 키에 여러 개의 값을 주렁주렁 매달 수 있는 자료구조입니다.
 
 실생활로 비유하자면, 영한사전에서 'Apple'이라는 하나의 단어(Key)에 '사과', '회사 이름', '뉴욕의 별명' 등 여러 가지 뜻(Value)이 등록되어 있는 것과 같습니다.
-
-\
-\
-\
 
 std::multimap 역시 내부적으로는 이진 탐색 트리(Binary Search Tree)를 사용합니다. 
 
