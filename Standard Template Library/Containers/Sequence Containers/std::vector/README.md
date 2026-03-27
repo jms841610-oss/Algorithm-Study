@@ -1,16 +1,6 @@
-std::vector
+std::vector의 동작 원리 
 
-\
-\
-\
-
-std::vector의 핵심 동작 원리 개요
-
-std::vector는 본질적으로 **크기가 자동으로 늘어나는 동적 배열(Dynamic Array)**입니다. 
-
-\
-\
-\
+std::vector는 본질적으로 크기가 자동으로 늘어나는 동적 배열(Dynamic Array)입니다. 
 
 이를 구현하기 위해 다음 세 가지 핵심 요소를 관리해야 합니다.
 
@@ -20,11 +10,7 @@ Size : 현재 배열에 실제로 들어있는 데이터의 개수입니다.
 
 Capacity : 현재 할당된 메모리의 전체 크기(최대 수용 가능 개수)입니다.
 
-\
-\
-\
-
-데이터 추가 과정 (push_back)
+데이터 추가 과정 (push_back) : 
 
 데이터를 추가할 때 size와 capacity를 비교합니다. 
 
