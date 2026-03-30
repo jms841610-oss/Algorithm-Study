@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -22,19 +23,10 @@ int main(){
             int start, end, speed;
             cin >> start >> end >> speed;
 
-            if((target_start <= end+1)&&(end+1 <= target_end)){
-                if(target_start <= start){
-                    ans += (end+1 - start) * speed;
-                }else{
-                    ans += (end+1 - target_start) * speed;
-                }
-            }else if(target_end < end+1){
-                if((target_start <= start)&&(start <= target_end)){
-                    ans += (target_end+1 - start) * speed;
-                }else if(start < target_start){
-                    ans += (target_end+1 - target_start) * speed;
-                }
-            }
+            int real_start = max(start,target_start);
+            int real_end = min(end, target_end);
+
+            if(real_end >= real_start) ans += (real_end+1 - real_start) * speed;
         }
         cout << "Data Set " << i+1 << ":" << "\n" << ans << "\n" << "\n";
     }
