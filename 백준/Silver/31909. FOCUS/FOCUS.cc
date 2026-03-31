@@ -3,17 +3,10 @@
 
 using namespace std;
 
-int two_squared(int num){
-    int result = 1;
-    for(int i=0;i<num;i++){
-        result *= 2;
-    }
-    return result;
-}
 pair<int,int> interpret(int A){
     for(int B=0;B<=7;B++){
         for(int C=0;C<=7;C++){
-            if(A == (two_squared(B) + two_squared(C))){
+            if(A == ((1 << B) + (1 << C))){
                 return {B,C};
             }
         }
