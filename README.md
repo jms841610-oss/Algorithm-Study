@@ -22,7 +22,7 @@ Directory Structure
 
 ├── Standard Template Library (find, map, deque...)
 
-├── 백준 (Bronze, Gold, Silver...)
+├── 백준 (Gold, Silver...)
 
 └── 알고리즘 (Greedy, BFS, Dijkstra...)
 
