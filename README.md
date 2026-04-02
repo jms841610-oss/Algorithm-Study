@@ -36,4 +36,4 @@ Lauguages : C/C++
 
 Tool : Visual Studio Code
 
-Platform : Baekjoon Online Judge
+Platform : Baekjoon Online Judge / Programmers
