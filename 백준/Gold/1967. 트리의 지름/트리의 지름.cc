@@ -4,26 +4,31 @@
 
 using namespace std;
 
-void DFS(int current, int total, int &ans, vector<vector<pair<int,int>>> &graphs, vector<bool> &is_leaf, vector<bool> &is_visited){
-    if(is_leaf[current]){
-        ans = max(ans, total);
-        return;
+void DFS(int current, int current_total, int &max_total, int &end, vector<vector<pair<int,int>>> &graphs, vector<bool> &is_visited){
+    is_visited[current] = true;
+
+    if(current_total > max_total){
+        max_total = current_total;
+        end = current;
     }
+
     for(int i=0;i<graphs[current].size();i++){
+
         int next_node = graphs[current][i].first;
         int next_dist = graphs[current][i].second;
 
         if(!is_visited[next_node]){
 
             is_visited[next_node] = true;
-            total += next_dist;
+            current_total += next_dist;
 
-            DFS(next_node, total, ans, graphs, is_leaf, is_visited);
+            DFS(next_node, current_total, max_total, end, graphs, is_visited);
 
             is_visited[next_node] = false;
-            total -= next_dist;
+            current_total -= next_dist;
         }
     }
+    is_visited[current] = false;
     return;
 }
 int main(){
@@ -34,7 +39,7 @@ int main(){
     cin >> N;
 
     vector<vector<pair<int,int>>> graphs(N+1);
-    vector<bool> is_leaf(N+1,false);
+    vector<bool> is_visited(N+1,false);
 
     for(int i=0;i<N-1;i++){
         int u, v, w;
@@ -43,21 +48,12 @@ int main(){
         graphs[u].push_back({v,w});
         graphs[v].push_back({u,w});
     }
-    for(int node=1;node<=N;node++){
-        if(graphs[node].size()==1){
-            is_leaf[node] = true;
-        }
-    }
-    int ans = 0;
+    int end = 0;
+    int max_total = 0;
 
-    for(int node=1;node<=N;node++){
-        if(is_leaf[node]){
-            vector<bool> is_visited(N+1,false);
-            is_leaf[node] = false;
-            is_visited[node] = true;
-            DFS(node, 0, ans, graphs, is_leaf, is_visited);
-        }
-    }
-    cout << ans << "\n";
+    DFS(  1, 0, max_total, end, graphs, is_visited);
+    DFS(end, 0, max_total, end, graphs, is_visited);
+
+    cout << max_total << "\n";
     return 0;
 }
