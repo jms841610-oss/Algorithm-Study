@@ -20,11 +20,11 @@ Core Contents
 
 Directory Structure
 
-├── 백준 (Gold, Silver...)
+├── 백준 (Gold, Silver)
 
-├── 알고리즘 (Greedy, BFS, Dijkstra...)
+├── 알고리즘 (기타 필수 테크닉, 최적화 및 의사결정, 탐색 및 그래프 알고리즘, 효율적인 탐색과 정렬)
 
-└── 프로그래머스 (Lv.1, Lv.2...)
+└── 프로그래머스 (Lv.1, Lv.2)
 
 \
 \
