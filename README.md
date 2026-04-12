@@ -32,7 +32,7 @@ Directory Structure
 
 Tech Stack
 
-Lauguages : C/C++
+Lauguages : C++
 
 Tool : Visual Studio Code
 
